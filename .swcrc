@@ -16,6 +16,11 @@
     "baseUrl": "./",
     "paths": {
       "~/*": ["src/*"]
+    },
+    "minify": {
+      "mangle": true,
+      "compress": true
     }
-  }
+  },
+  "minify": true
 }
