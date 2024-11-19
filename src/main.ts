@@ -12,9 +12,8 @@ import { runAfterCreateHook, runBeforeCreateHook } from "./helpers/procedures";
   const templateConfigs = await scanTemplates();
   const prompts = await preparePrompts(templateConfigs);
 
-  const { projectName, template } = await inquirer.prompt(
-    prompts.map((q) => q.inquirer)
-  );
+  const answers = await inquirer.prompt(prompts.map((q) => q.inquirer));
+  const { projectName, template } = answers;
 
   const templateConfig = templateConfigs[template];
   const targetDir = join(process.cwd(), projectName);
@@ -25,7 +24,7 @@ import { runAfterCreateHook, runBeforeCreateHook } from "./helpers/procedures";
     process.exit();
   }
 
-  await runBeforeCreateHook(templateConfig);
+  await runBeforeCreateHook(templateConfig, answers);
 
   await cp(
     join(templateConfig.parentPath, templateConfig.name, "template"),
@@ -35,5 +34,5 @@ import { runAfterCreateHook, runBeforeCreateHook } from "./helpers/procedures";
     }
   );
 
-  await runAfterCreateHook(templateConfig);
+  await runAfterCreateHook(templateConfig, answers);
 })();

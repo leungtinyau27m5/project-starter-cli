@@ -3,7 +3,10 @@ import { TemplateConfig } from "./scanTemplates";
 import { join } from "node:path";
 import { isProduction } from "./common";
 
-export const runBeforeCreateHook = async (config: TemplateConfig) => {
+export const runBeforeCreateHook = async (
+  config: TemplateConfig,
+  answers: Record<string, any>
+) => {
   try {
     const ext = isProduction() ? "js" : "mjs";
     const file = join(config.parentPath, config.name, `beforeCreate.${ext}`);
@@ -14,13 +17,16 @@ export const runBeforeCreateHook = async (config: TemplateConfig) => {
       return;
     }
     const { default: hook } = await import(file);
-    await hook();
+    await hook(config, answers);
   } catch (error) {
     console.error("err", error);
   }
 };
 
-export const runAfterCreateHook = async (config: TemplateConfig) => {
+export const runAfterCreateHook = async (
+  config: TemplateConfig,
+  answers: Record<string, any>
+) => {
   try {
     const ext = isProduction() ? "js" : "mjs";
     const file = join(config.parentPath, config.name, `afterCreate.${ext}`);
@@ -31,7 +37,7 @@ export const runAfterCreateHook = async (config: TemplateConfig) => {
       return;
     }
     const { default: hook } = await import(file);
-    await hook();
+    await hook(config, answers);
   } catch (error) {
     console.error("err", error);
   }
