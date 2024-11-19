@@ -11,8 +11,8 @@ COPY . .
 
 RUN corepack install
 
-RUN if [ -f pnpm.lock ]; then \
-    pnpm i --frozen-lockfile && \
+RUN if [ -f pnpm-lock.yaml ]; then \
+    pnpm i --frozen-lockfile --force && \
     pnpm prebuild && pnpm build && pnpm postbuild; \
     # yarn
     elif [ -f yarn.lock ]; then \
@@ -31,15 +31,13 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 developer
 
 COPY --from=builder --chown=developer:nodejs /app/dist .
-
-COPY --from=builder --chown=developer:nodejs /app/yarn.lock* /app/pnpm.lock* /app/package-lock.json* ./
-
-COPY --from=builder --chown=developer:nodejs /app/.yarn ./.yarn
+COPY --from=builder --chown=developer:nodejs /app/yarn.lock* /app/pnpm-lock.yaml* /app/package-lock.json* ./
+COPY --from=builder --chown=developer:nodejs /app/.yarn* ./.yarn
 
 RUN corepack install
 
-RUN if [ -f pnpm.lock ]; then \
-    pnpm --frozen-lockfile --prod; \
+RUN if [ -f pnpm-lock.yaml ]; then \
+    pnpm i --prod; \
     elif [ -f yarn.lock ]; then \
     yarn workspaces focus --production; \
     else npm ci --production; \
