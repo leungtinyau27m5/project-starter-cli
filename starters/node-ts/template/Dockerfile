@@ -21,7 +21,7 @@ RUN if [ -f pnpm-lock.yaml ]; then \
     # npm
     elif [ -f package-lock.json ]; then \
     npm ci && \
-    npm build; \
+    npm run build; \
     fi
 
 FROM deps AS runner
@@ -44,5 +44,3 @@ RUN if [ -f pnpm-lock.yaml ]; then \
     fi
 
 USER developer
-
-
