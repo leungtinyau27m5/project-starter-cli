@@ -2,7 +2,7 @@ export default {
     plugins: [
       "@trivago/prettier-plugin-sort-imports",
     ],
-    importOrder: ["<THIRD_PARTY_MODULES>", "@aptsdev/(.*)$", "^@/(.*)$", "^[./]"],
+    importOrder: ["<THIRD_PARTY_MODULES>", "@mui/(.*)$", "^@/(.*)$", "^[./]"],
     importOrderSeparation: true,
     importOrderSortSpecifiers: true,
   
