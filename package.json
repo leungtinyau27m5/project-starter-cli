@@ -1,6 +1,6 @@
 {
-  "name": "next-api",
-  "version": "1.0.0",
+  "name": "stl-create",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "NODE_ENV=development node --import ./scripts/register.hook.mjs ./src/main.ts",
@@ -31,5 +31,9 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.3"
   },
-  "packageManager": "yarn@4.5.1+sha512.341db9396b6e289fecc30cd7ab3af65060e05ebff4b3b47547b278b9e67b08f485ecd8c79006b405446262142c7a38154445ef7f17c1d5d1de7d90bf9ce7054d"
+  "packageManager": "yarn@4.5.1+sha512.341db9396b6e289fecc30cd7ab3af65060e05ebff4b3b47547b278b9e67b08f485ecd8c79006b405446262142c7a38154445ef7f17c1d5d1de7d90bf9ce7054d",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leungtinyau27m5/project-starter-cli.git"
+  }
 }

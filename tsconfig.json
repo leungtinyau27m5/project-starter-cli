@@ -21,7 +21,7 @@
     "baseUrl": "."
   },
   "include": ["src"],
-  "exclude": [],
+  "exclude": ["starters"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"
